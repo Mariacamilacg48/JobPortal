@@ -15,5 +15,7 @@ namespace JobPortal.Web.Data
         }
 
         public DbSet<UserITM> UserITMs { get; set; }
+
+        public DbSet<UserType> UserType { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JobPortal.Web.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class CompleteDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,12 +25,28 @@ namespace JobPortal.Web.Migrations
                 {
                     table.PrimaryKey("PK_UserITMs", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "UserType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserType", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "UserITMs");
+
+            migrationBuilder.DropTable(
+                name: "UserType");
         }
     }
 }

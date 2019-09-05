@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JobPortal.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190831220442_InitialDb")]
-    partial class InitialDb
+    [Migration("20190905051740_CompleteDB")]
+    partial class CompleteDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,6 +55,21 @@ namespace JobPortal.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserITMs");
+                });
+
+            modelBuilder.Entity("JobPortal.Web.Data.Entities.UserType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserType");
                 });
 #pragma warning restore 612, 618
         }

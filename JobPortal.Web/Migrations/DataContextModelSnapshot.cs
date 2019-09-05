@@ -54,6 +54,21 @@ namespace JobPortal.Web.Migrations
 
                     b.ToTable("UserITMs");
                 });
+
+            modelBuilder.Entity("JobPortal.Web.Data.Entities.UserType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserType");
+                });
 #pragma warning restore 612, 618
         }
     }
