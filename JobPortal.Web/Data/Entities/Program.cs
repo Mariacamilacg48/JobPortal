@@ -21,5 +21,6 @@ namespace JobPortal.Web.Data.Entities
         public string FacultyName { get; set; }
 
         public ICollection<UserITM> userITMs { get; set; }
+
     }
 }

@@ -51,5 +51,6 @@ namespace JobPortal.Web.Data.Entities
         public UserType UserType { get; set; }
 
         public ICollection<VancancyPostulations> VancancyPostulations { get; set; }
+
     }
 }
