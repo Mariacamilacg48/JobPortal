@@ -15,5 +15,7 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "Meeting State")]
         public string Name { get; set; }
 
+        public ICollection<InterviewMeeting> interviewMeetings { get; set; }
+
     }
 }
