@@ -15,7 +15,7 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "Name")]
         public string Name { get; set; }     
        
-        [Display(Name = "UserType")]
+        [Display(Name = "User Type")]
         public string FullName => $" {Name}";
 
     }
