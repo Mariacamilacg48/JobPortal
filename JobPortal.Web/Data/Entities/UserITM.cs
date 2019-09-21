@@ -44,7 +44,7 @@ namespace JobPortal.Web.Data.Entities
         public string FullName => $" {FirstName} {LastName}";
 
         [Display(Name = "UserITM")]
-        public string FullNameWithDocument => $" {FirstName} {LastName} - {Document}";
+        public string FullNameWithDocument => $" {FirstName} {LastName} - {Document}"; 
 
 
     }
