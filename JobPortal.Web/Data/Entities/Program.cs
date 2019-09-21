@@ -19,5 +19,7 @@ namespace JobPortal.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         [Display(Name = "Faculty Name")]
         public string FacultyName { get; set; }
+
+        public ICollection<UserITM> userITMs { get; set; }
     }
 }

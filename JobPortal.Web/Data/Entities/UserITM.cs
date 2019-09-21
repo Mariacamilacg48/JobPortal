@@ -46,6 +46,10 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "UserITM")]
         public string FullNameWithDocument => $" {FirstName} {LastName} - {Document}";
 
+        public Program Program{ get; set; }
 
+        public UserType UserType { get; set; }
+
+        public ICollection<VancancyPostulations> VancancyPostulations { get; set; }
     }
 }

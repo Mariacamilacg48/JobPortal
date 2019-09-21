@@ -18,5 +18,6 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "User Type")]
         public string FullName => $" {Name}";
 
+        public ICollection<UserITM> userITMs { get; set; }
     }
 }
