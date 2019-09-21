@@ -21,6 +21,8 @@ namespace JobPortal.Web.Data.Entities
         public DateTime DateLocal => Date.ToLocalTime();
 
         public string Remarks { get; set; }
-                          
+
+        public Agenda Agenda { get; set; }
+
     }
 }

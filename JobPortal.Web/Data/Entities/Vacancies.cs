@@ -15,7 +15,8 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "Vacancies Name")]
         public string Name { get; set; }
 
-
+        public ICollection<Enterprise> Enterprises { get; set; }
+        public ICollection<VacancyTypes> VacancyTypes { get; set; }
 
     }
 }
