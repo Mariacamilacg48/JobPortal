@@ -32,5 +32,7 @@ namespace JobPortal.Web.Data.Entities
         ? null
             : $"http://TBD.azurewebsites.net{Logo.Substring(1)}";
 
+        public ICollection<VancancyPostulations> VancancyPostulations { get; set; }
+
     }
 }
