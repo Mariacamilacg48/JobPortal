@@ -21,6 +21,10 @@ namespace JobPortal.Web.Data.Entities
         public DateTime DateLocal => Date.ToLocalTime();
 
         public string Remarks { get; set; }
-                          
+
+        public VancancyPostulations VancancyPostulations { get; set; }
+
+        public ICollection<MeetingState> MeetingStates { get; set; }
+
     }
 }

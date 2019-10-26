@@ -14,5 +14,7 @@ namespace JobPortal.Web.Data.Entities
         [MaxLength(50, ErrorMessage = "The {0} field can not have more than {1} characters.")]
         [Display(Name = "State Name")]
         public string Name { get; set; }
+
+        public VancancyPostulations VancancyPostulations { get; set; }
     }
 }
