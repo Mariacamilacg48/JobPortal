@@ -1,4 +1,5 @@
 ﻿using JobPortal.Web.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Web.Data
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<User>
     {
         public DataContext(DbContextOptions<DataContext> options) : base (options)
         {
@@ -15,6 +16,7 @@ namespace JobPortal.Web.Data
         }
 
         public DbSet<Agenda> Agendas { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<Enterprise> Enterprises { get; set; }
         public DbSet<InterviewMeeting> InterviewMeetings { get; set; }
         public DbSet<MeetingState> MeetingStates { get; set; }
