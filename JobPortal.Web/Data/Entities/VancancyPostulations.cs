@@ -21,5 +21,10 @@ namespace JobPortal.Web.Data.Entities
         public DateTime DateLocal => Date.ToLocalTime();
 
         public UserITM userITM { get; set; }
+
+        public Enterprise Enterprise { get; set; }
+        
+        public Vacancies Vacancies { get; set; }
+
     }
 }
