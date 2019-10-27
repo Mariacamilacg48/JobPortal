@@ -23,5 +23,7 @@ namespace JobPortal.Web.Data.Entities
         public DateTime DateLocal => Date.ToLocalTime();
 
         public ICollection<InterviewMeeting> InterviewMeetings { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }

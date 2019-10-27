@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Web.Helpers
 {
-    interface IUserHelper
+    public interface IUserHelper
     {
         Task<User> GetUserByEmailAsync(string email);
 

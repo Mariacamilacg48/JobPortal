@@ -24,6 +24,8 @@ namespace JobPortal.Web.Data.Entities
 
         public VancancyPostulations VancancyPostulations { get; set; }
 
+        public Agenda Agenda { get; set; }
+
         public ICollection<MeetingState> MeetingStates { get; set; }
 
     }

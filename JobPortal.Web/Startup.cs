@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyVet.Web.Helpers;
 
 namespace JobPortal.Web
 {
@@ -38,7 +39,7 @@ namespace JobPortal.Web
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddScoped<IUserHelper, IUserHelper>();
+            services.AddScoped<IUserHelper, UserHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
