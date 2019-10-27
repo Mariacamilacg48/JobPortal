@@ -21,5 +21,7 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}")]
         public DateTime DateLocal => Date.ToLocalTime();
+
+        public ICollection<InterviewMeeting> InterviewMeetings { get; set; }
     }
 }
