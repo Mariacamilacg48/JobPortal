@@ -19,7 +19,7 @@ namespace JobPortal.Web.Data
         public DbSet<InterviewMeeting> InterviewMeetings { get; set; }
         public DbSet<MeetingState> MeetingStates { get; set; }
         public DbSet<PostulationStates> PostulationStates { get; set; }
-        public DbSet<Program> Programs { get; set; }
+        public DbSet<AcademicProgram> AcademicPrograms { get; set; }
         public DbSet<UserITM> UserITMs { get; set; }
         public DbSet<UserType> UserType { get; set; }
         public DbSet<Vacancies> Vacancies { get; set; }

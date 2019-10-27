@@ -46,7 +46,7 @@ namespace JobPortal.Web.Data.Entities
         [Display(Name = "UserITM")]
         public string FullNameWithDocument => $" {FirstName} {LastName} - {Document}";
 
-        public Program Program{ get; set; }
+        public AcademicProgram AcademicProgram { get; set; }
 
         public UserType UserType { get; set; }
 
