@@ -3,7 +3,7 @@ using JobPortal.Web.Helpers;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 
-namespace MyVet.Web.Helpers
+namespace JobPortal.Web.Helpers
 {
     public class UserHelper : IUserHelper
     {

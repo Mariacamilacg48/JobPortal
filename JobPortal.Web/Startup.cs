@@ -12,7 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MyVet.Web.Helpers;
+using JobPortal.Web.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace JobPortal.Web
 {
@@ -39,9 +40,11 @@ namespace JobPortal.Web
             {
                 cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
+            services.AddDefaultIdentity<User>().AddRoles<IdentityRole>().AddEntityFrameworkStores<DataContext>();
+            }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace JobPortal.Web.Data.Entities
 {
-    public class User  : IdentityUser
+    public class User : IdentityUser
     {
         
         [Required(ErrorMessage = "The field {0} is mandatory.")]
