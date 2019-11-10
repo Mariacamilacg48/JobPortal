@@ -10,25 +10,22 @@ using JobPortal.Web.Data.Entities;
 
 namespace JobPortal.Web.Controllers
 {
-    public class UserITMsController : Controller
+    public class UserTypesController : Controller
     {
         private readonly DataContext _context;
 
-        public UserITMsController(DataContext context)
+        public UserTypesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: UserITMs
-        public IActionResult Index()
+        // GET: UserTypes
+        public async Task<IActionResult> Index()
         {
-            return View( _context.UserITMs
-                .Include(o => o.User)
-                .Include(o => o.UserType)
-                .Include(o => o.AcademicProgram));
+            return View(await _context.UserType.ToListAsync());
         }
 
-        // GET: UserITMs/Details/5
+        // GET: UserTypes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,39 +33,39 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs
+            var userType = await _context.UserType
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userITM == null)
+            if (userType == null)
             {
                 return NotFound();
             }
 
-            return View(userITM);
+            return View(userType);
         }
 
-        // GET: UserITMs/Create
+        // GET: UserTypes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UserITMs/Create
+        // POST: UserTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserITM userITM)
+        public async Task<IActionResult> Create([Bind("Id,Name")] UserType userType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userITM);
+                _context.Add(userType);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userITM);
+            return View(userType);
         }
 
-        // GET: UserITMs/Edit/5
+        // GET: UserTypes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +73,22 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs.FindAsync(id);
-            if (userITM == null)
+            var userType = await _context.UserType.FindAsync(id);
+            if (userType == null)
             {
                 return NotFound();
             }
-            return View(userITM);
+            return View(userType);
         }
 
-        // POST: UserITMs/Edit/5
+        // POST: UserTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] UserITM userITM)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] UserType userType)
         {
-            if (id != userITM.Id)
+            if (id != userType.Id)
             {
                 return NotFound();
             }
@@ -100,12 +97,12 @@ namespace JobPortal.Web.Controllers
             {
                 try
                 {
-                    _context.Update(userITM);
+                    _context.Update(userType);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserITMExists(userITM.Id))
+                    if (!UserTypeExists(userType.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +113,10 @@ namespace JobPortal.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userITM);
+            return View(userType);
         }
 
-        // GET: UserITMs/Delete/5
+        // GET: UserTypes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +124,30 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs
+            var userType = await _context.UserType
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userITM == null)
+            if (userType == null)
             {
                 return NotFound();
             }
 
-            return View(userITM);
+            return View(userType);
         }
 
-        // POST: UserITMs/Delete/5
+        // POST: UserTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userITM = await _context.UserITMs.FindAsync(id);
-            _context.UserITMs.Remove(userITM);
+            var userType = await _context.UserType.FindAsync(id);
+            _context.UserType.Remove(userType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserITMExists(int id)
+        private bool UserTypeExists(int id)
         {
-            return _context.UserITMs.Any(e => e.Id == id);
+            return _context.UserType.Any(e => e.Id == id);
         }
     }
 }

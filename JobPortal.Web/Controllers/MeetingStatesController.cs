@@ -10,25 +10,22 @@ using JobPortal.Web.Data.Entities;
 
 namespace JobPortal.Web.Controllers
 {
-    public class UserITMsController : Controller
+    public class MeetingStatesController : Controller
     {
         private readonly DataContext _context;
 
-        public UserITMsController(DataContext context)
+        public MeetingStatesController(DataContext context)
         {
             _context = context;
         }
 
-        // GET: UserITMs
-        public IActionResult Index()
+        // GET: MeetingStates
+        public async Task<IActionResult> Index()
         {
-            return View( _context.UserITMs
-                .Include(o => o.User)
-                .Include(o => o.UserType)
-                .Include(o => o.AcademicProgram));
+            return View(await _context.MeetingStates.ToListAsync());
         }
 
-        // GET: UserITMs/Details/5
+        // GET: MeetingStates/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,39 +33,39 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs
+            var meetingState = await _context.MeetingStates
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userITM == null)
+            if (meetingState == null)
             {
                 return NotFound();
             }
 
-            return View(userITM);
+            return View(meetingState);
         }
 
-        // GET: UserITMs/Create
+        // GET: MeetingStates/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: UserITMs/Create
+        // POST: MeetingStates/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserITM userITM)
+        public async Task<IActionResult> Create([Bind("Id,Name")] MeetingState meetingState)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userITM);
+                _context.Add(meetingState);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userITM);
+            return View(meetingState);
         }
 
-        // GET: UserITMs/Edit/5
+        // GET: MeetingStates/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,22 +73,22 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs.FindAsync(id);
-            if (userITM == null)
+            var meetingState = await _context.MeetingStates.FindAsync(id);
+            if (meetingState == null)
             {
                 return NotFound();
             }
-            return View(userITM);
+            return View(meetingState);
         }
 
-        // POST: UserITMs/Edit/5
+        // POST: MeetingStates/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id")] UserITM userITM)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] MeetingState meetingState)
         {
-            if (id != userITM.Id)
+            if (id != meetingState.Id)
             {
                 return NotFound();
             }
@@ -100,12 +97,12 @@ namespace JobPortal.Web.Controllers
             {
                 try
                 {
-                    _context.Update(userITM);
+                    _context.Update(meetingState);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserITMExists(userITM.Id))
+                    if (!MeetingStateExists(meetingState.Id))
                     {
                         return NotFound();
                     }
@@ -116,10 +113,10 @@ namespace JobPortal.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userITM);
+            return View(meetingState);
         }
 
-        // GET: UserITMs/Delete/5
+        // GET: MeetingStates/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -127,30 +124,30 @@ namespace JobPortal.Web.Controllers
                 return NotFound();
             }
 
-            var userITM = await _context.UserITMs
+            var meetingState = await _context.MeetingStates
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (userITM == null)
+            if (meetingState == null)
             {
                 return NotFound();
             }
 
-            return View(userITM);
+            return View(meetingState);
         }
 
-        // POST: UserITMs/Delete/5
+        // POST: MeetingStates/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var userITM = await _context.UserITMs.FindAsync(id);
-            _context.UserITMs.Remove(userITM);
+            var meetingState = await _context.MeetingStates.FindAsync(id);
+            _context.MeetingStates.Remove(meetingState);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserITMExists(int id)
+        private bool MeetingStateExists(int id)
         {
-            return _context.UserITMs.Any(e => e.Id == id);
+            return _context.MeetingStates.Any(e => e.Id == id);
         }
     }
 }
