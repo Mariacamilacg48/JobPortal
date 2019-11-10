@@ -43,7 +43,6 @@ namespace JobPortal.Web.Data
 
         }
 
-
         private async Task CheckVacanciesTypesAsync()
         {
             if (!_context.VacancyTypes.Any())
@@ -79,9 +78,9 @@ namespace JobPortal.Web.Data
         {
             if (!_context.PostulationStates.Any())
             {
-                _context.PostulationStates.Add(new PostulationStates { Name = "Active" });
-                _context.PostulationStates.Add(new PostulationStates { Name = "In progress" });
-                _context.PostulationStates.Add(new PostulationStates { Name = "Finished" });
+                _context.PostulationStates.Add(new PostulationStates { Name = "Pending" });
+                _context.PostulationStates.Add(new PostulationStates { Name = "In review" });
+                _context.PostulationStates.Add(new PostulationStates { Name = "Accepted" });
             }
         }
 
@@ -125,7 +124,10 @@ namespace JobPortal.Web.Data
         {
             if (!_context.MeetingStates.Any())
             {
-                _context.MeetingStates.Add(new MeetingState { });
+                _context.MeetingStates.Add(new MeetingState {Name="Pending" });
+                _context.MeetingStates.Add(new MeetingState { Name = "In process" });
+                _context.MeetingStates.Add(new MeetingState { Name = "Finished" });
+
             }
 
         }
@@ -181,7 +183,7 @@ namespace JobPortal.Web.Data
         {
             if (!_context.Enterprises.Any())
             {
-                _context.Enterprises.Add(new Enterprise { Name = "Snacks Food", NIT = "1017152736", Phone = "3876543", Remarks = "Comidas" });
+                _context.Enterprises.Add(new Enterprise { Name = "Snacks Food", NIT = "1017152736", Phone = "3876543", Remarks = "Foods" });
                 await _context.SaveChangesAsync();
             }
         }
