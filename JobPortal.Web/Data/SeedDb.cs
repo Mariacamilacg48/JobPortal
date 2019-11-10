@@ -25,8 +25,8 @@ namespace JobPortal.Web.Data
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckRoles();
-            var manager = await CheckUserAsync("1040739413", "Daniela", "Sanchez", "dsanchep7@gmail.com", "3206416083", "Calle Luna Calle Sol", "Admin");
-            var customer = await CheckUserAsync("1017241448", "Camila", "Chica", "mariacamilacg48@hotmail.com", "3317901412", "Calle Luna Calle Sol", "Customer");
+            var manager = await CheckUserAsync("1040739413", "Daniela", "Sanchez",4, "dsanchep7@gmail.com", "3206416083", "13415879","Calle Luna Calle Sol", "Admin");
+            var customer = await CheckUserAsync("1017241448", "Camila", "Chica",5, "mariacamilacg48@hotmail.com", "3317901412", "19847526", "Calle Luna Calle Sol", "Customer");
             await CheckAcademicProgramAsync();
             await CheckAgendasAsync();
             await CheckEnterpriseAsync();
@@ -89,8 +89,10 @@ namespace JobPortal.Web.Data
             string document,
             string firstName,
             string lastName,
+            int semester,
             string email,
             string phone,
+            string carnet,
             string address,
             string role)
 
@@ -103,9 +105,11 @@ namespace JobPortal.Web.Data
                     Document = document,
                     FirstName = firstName,
                     LastName = lastName,
+                    Semester = semester,
                     Email = email,
                     UserName = email,
-                    PhoneNumber = phone,
+                    CellPhone = phone,
+                    Carnet = carnet,
                     Address = address,
                     SecurityStamp = Guid.NewGuid().ToString()
                 };

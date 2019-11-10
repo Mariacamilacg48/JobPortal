@@ -20,7 +20,7 @@ namespace JobPortal.Web
             using (var scope = scopeFactory.CreateScope())
             {
                 var seeder = scope.ServiceProvider.GetService<SeedDb>();
-                //seeder.SeedAsync().Wait();
+                seeder.SeedAsync().Wait();
 
             }
         }
