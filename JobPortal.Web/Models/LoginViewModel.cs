@@ -21,4 +21,4 @@ namespace JobPortal.Web.Models
     }
 
 }
-}
+
