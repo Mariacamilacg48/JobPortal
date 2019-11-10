@@ -7,16 +7,22 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using JobPortal.Web.Data;
 using JobPortal.Web.Data.Entities;
+using JobPortal.Web.Models;
+using JobPortal.Web.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace JobPortal.Web.Controllers
 {
+    [Authorize (Roles = "admin")]
     public class UserITMsController : Controller
     {
         private readonly DataContext _context;
+        private readonly IUserHelper _userHelper;
 
-        public UserITMsController(DataContext context)
+        public UserITMsController(DataContext context, IUserHelper userHelper)
         {
             _context = context;
+            _userHelper = userHelper;
         }
 
         // GET: UserITMs
@@ -34,6 +40,9 @@ namespace JobPortal.Web.Controllers
             }
 
             var userITM = await _context.UserITMs
+                .Include(o => o.User)
+                .Include(o => o.UserType)
+                .Include(o => o.AcademicProgram)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (userITM == null)
             {
@@ -54,15 +63,56 @@ namespace JobPortal.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id")] UserITM userITM)
+        public async Task<IActionResult> Create(AddUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(userITM);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                var user = new User
+                {
+                    Document = model.Document,
+                    Address = model.Address,
+                    Email = model.Username,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    CellPhone = model.CellPhone,
+                    UserName = model.Username,
+                    Semester = model.Semester,
+                    Carnet = model.Carnet,
+                    
+                };
+
+                var response = await _userHelper.AddUserAsync(user, model.Password);
+                if (response.Succeeded)
+                {
+                    var userInDB = await _userHelper.GetUserByEmailAsync(model.Username);
+                    await _userHelper.AddUserToRoleAsync(userInDB, "Customer");
+
+                    var userITM = new UserITM
+                    {
+                        AcademicProgram = new AcademicProgram(),
+                        UserType = new UserType(),
+                        VancancyPostulations = new List<VancancyPostulations>(),  
+                        User = userInDB
+                    };
+
+                    _context.UserITMs.Add(userITM);
+                    try
+                    {
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (Exception ex)
+                    {
+
+                        ModelState.AddModelError(string.Empty, ex.ToString());
+                        return View(model);
+                    }
+                    
+                    
+                }
+                ModelState.AddModelError(string.Empty, response.Errors.FirstOrDefault().Description);
             }
-            return View(userITM);
+            return View(model);
         }
 
         // GET: UserITMs/Edit/5
